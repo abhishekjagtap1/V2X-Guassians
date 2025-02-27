@@ -1,0 +1,11 @@
+mmcv==1.6.0
+matplotlib
+argparse
+lpips==0.1.4
+open3d==0.18.0
+opencv-python
+plyfile
+pytorch_msssim
+open3d
+kornia
+imageio[ffmpeg]

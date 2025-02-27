@@ -1,0 +1,1427 @@
+{
+    "openlabel": {
+        "metadata": {
+            "schema_version": "1.0.0"
+        },
+        "coordinate_systems": {},
+        "frames": {
+            "0": {
+                "frame_properties": {
+                    "timestamp": 1688625741.0465953,
+                    "image_file_names": [
+                        "1688625741_037483960_s110_camera_basler_south1_8mm.jpg",
+                        "1688625741_027764001_s110_camera_basler_south2_8mm.jpg",
+                        "1688625741_044317791_s110_camera_basler_north_8mm.jpg",
+                        "1688625741_038743871_s110_camera_basler_east_8mm.jpg",
+                        "1688625741_052165680_vehicle_camera_basler_16mm.jpg"
+                    ],
+                    "point_cloud_file_names": [
+                        "1688625741_092755795_vehicle_lidar_robosense.pcd",
+                        "1688625741_046595374_s110_lidar_ouster_south.pcd",
+                        "1688625741_046595374_s110_lidar_ouster_south_and_vehicle_lidar_robosense_registered.pcd"
+                    ],
+                    "transforms": {
+                        "vehicle_lidar_robosense_to_s110_lidar_ouster_south": {
+                            "src": "vehicle_lidar_robosense",
+                            "dst": "s110_lidar_ouster_south",
+                            "transform_src_to_dst": {
+                                "matrix4x4": [
+                                    [
+                                        -0.20449641059185875,
+                                        0.9763434118164324,
+                                        -0.07024784877628222,
+                                        19.84157343814025
+                                    ],
+                                    [
+                                        -0.9788590988740755,
+                                        -0.20426143826882034,
+                                        0.010589116477967018,
+                                        54.70294854445201
+                                    ],
+                                    [
+                                        -0.004010312516114524,
+                                        0.07092818226207777,
+                                        0.9974733632305793,
+                                        -6.023394080662584
+                                    ],
+                                    [
+                                        0.0,
+                                        0.0,
+                                        0.0,
+                                        1.0
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                },
+                "objects": {
+                    "7d9baf0c-44b3-4c5b-84b6-0a876166bcfd": {
+                        "object_data": {
+                            "name": "BUS_7d9baf0c",
+                            "type": "BUS",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    15.490469214341982,
+                                    32.02923546207926,
+                                    -6.370000000000004,
+                                    0,
+                                    0,
+                                    -0.7707388788989694,
+                                    0.63715114419858,
+                                    12.200000000000001,
+                                    2.872602701187134,
+                                    3.22
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 1054
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "895ec71e-da02-4318-8b21-c47d8682a3f0": {
+                        "object_data": {
+                            "name": "BUS_895ec71e",
+                            "type": "BUS",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    20.207141631450448,
+                                    37.78195656466833,
+                                    -6.293796380148658,
+                                    0,
+                                    0,
+                                    -0.7610952636313663,
+                                    0.6486401156865809,
+                                    12.3,
+                                    2.98,
+                                    3.29
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 2031
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "a7193a0d-ea14-405f-b6db-f5bc0afcd646": {
+                        "object_data": {
+                            "name": "PEDESTRIAN_a7193a0d",
+                            "type": "PEDESTRIAN",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    36.656354026681946,
+                                    34.2024318774273,
+                                    -6.48,
+                                    0,
+                                    0,
+                                    -0.5396320487339693,
+                                    0.8419009751622687,
+                                    0.81,
+                                    0.8309734463691711,
+                                    1.82
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 45
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "ec72970c-05e0-42ae-89fc-1570c30314c7": {
+                        "object_data": {
+                            "name": "PEDESTRIAN_ec72970c",
+                            "type": "PEDESTRIAN",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    35.20922978363605,
+                                    18.11154639702742,
+                                    -6.477349758148193,
+                                    0,
+                                    0,
+                                    -0.5971954413623921,
+                                    0.8020957578842925,
+                                    0.9500000000000001,
+                                    0.84,
+                                    1.9149001836776733
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 23
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "fbf15d88-0134-4167-bfb8-1c510790266c": {
+                        "object_data": {
+                            "name": "PEDESTRIAN_fbf15d88",
+                            "type": "PEDESTRIAN",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    33.68051004269853,
+                                    14.980665080462543,
+                                    -6.412044048309326,
+                                    0,
+                                    0,
+                                    -0.636537182221968,
+                                    0.7712460149971065,
+                                    0.8295974135398865,
+                                    0.8193521499633789,
+                                    1.772221326828003
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 38
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "25b32cd0-4882-4da3-943e-7dcbc82fdf3c": {
+                        "object_data": {
+                            "name": "TRAILER_25b32cd0",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    11.938881437295564,
+                                    33.50545013260565,
+                                    -6.390300667785441,
+                                    0,
+                                    0,
+                                    -0.7707388788989694,
+                                    0.63715114419858,
+                                    6.71,
+                                    3.37,
+                                    3.4
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": "GREEN"
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": "box"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 225
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "4c538cb0-b135-4a7a-a6ca-b7b8f6557898": {
+                        "object_data": {
+                            "name": "TRUCK_4c538cb0",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    13.798116453139182,
+                                    40.1997959925629,
+                                    -6.285000000000001,
+                                    0,
+                                    0,
+                                    -0.7707388788989694,
+                                    0.63715114419858,
+                                    2.25,
+                                    2.73,
+                                    3.63
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": "PARTIALLY_OCCLUDED"
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": "RED"
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 55
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "d4e5c3aa-2321-4b91-9d8c-a04be9381fb6": {
+                        "object_data": {
+                            "name": "TRAILER_d4e5c3aa",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    14.584528948267804,
+                                    44.55824910169309,
+                                    -6.305325231602827,
+                                    0,
+                                    0,
+                                    -0.7707388788989694,
+                                    0.63715114419858,
+                                    6.57,
+                                    2.83,
+                                    3.71
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": "PARTIALLY_OCCLUDED"
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": "box"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 2802
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "4af609ed-6993-4d25-b448-fa22555cdc1e": {
+                        "object_data": {
+                            "name": "CAR_4af609ed",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    48.334095805500425,
+                                    33.36929082214187,
+                                    -6.3679346106694235,
+                                    0,
+                                    0,
+                                    -0.8414709848078965,
+                                    0.5403023058681398,
+                                    4.19,
+                                    2.09,
+                                    1.82
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 51
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "3af88ae4-a948-45a0-897f-cda85c85c4d2": {
+                        "object_data": {
+                            "name": "TRUCK_3af88ae4",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    11.274681784069976,
+                                    29.559465450264224,
+                                    -6.385347502730846,
+                                    0,
+                                    0,
+                                    -0.7707388788989694,
+                                    0.63715114419858,
+                                    2.0300000000000002,
+                                    3.04,
+                                    3.44
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 188
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "2374573d-1b03-48b9-b924-65308408c65c": {
+                        "object_data": {
+                            "name": "CAR_2374573d",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    35.62115121659915,
+                                    101.60011296263771,
+                                    -6.565147023230091,
+                                    0,
+                                    0,
+                                    -0.9963217522863494,
+                                    0.08569110759616845,
+                                    4.7,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 81
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "08b40be5-9217-4126-adfb-47d39601de41": {
+                        "object_data": {
+                            "name": "CAR_08b40be5",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    21.41,
+                                    -26.560000000000002,
+                                    -6.6191732390878775,
+                                    -0.00346554173530982,
+                                    0.0036041381977091457,
+                                    0.7208216326348326,
+                                    0.6931025711494562,
+                                    4.7,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 22
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "2d46cc2d-171d-4ce5-ab80-4c9de1efbf82": {
+                        "object_data": {
+                            "name": "CAR_2d46cc2d",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    31.48753508610434,
+                                    -25.839107080426903,
+                                    -6.205089923909604,
+                                    -0.0070695915622040195,
+                                    0.00013859472994715277,
+                                    0.720829950019674,
+                                    0.693075886769464,
+                                    5.5,
+                                    2.2,
+                                    2.05
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 154
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "7747c792-7467-4908-b3ad-2c02cee775ce": {
+                        "object_data": {
+                            "name": "TRUCK_7747c792",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    28.261033144282166,
+                                    -30.443444482959478,
+                                    -5.981293539131138,
+                                    -0.00346554173530982,
+                                    0.0036041381977091457,
+                                    0.7208216326348326,
+                                    0.6931025711494562,
+                                    8.2,
+                                    2.7,
+                                    2.5500000000000003
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 226
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "4ec11086-ee6d-42c4-88b1-f7faeb47d4a8": {
+                        "object_data": {
+                            "name": "CAR_4ec11086",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    32.09513497121475,
+                                    -40.533456679724225,
+                                    -6.210250767744755,
+                                    -0.0070695915622040195,
+                                    0.00013859472994715277,
+                                    0.720829950019674,
+                                    0.693075886769464,
+                                    4.7,
+                                    2.09,
+                                    1.7
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 4
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "2233c0fe-1597-43a6-8f33-fe131eb3aef2": {
+                        "object_data": {
+                            "name": "TRUCK_2233c0fe",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    29.07162716405276,
+                                    -49.64707568041227,
+                                    -5.3,
+                                    -0.003465541735309821,
+                                    0.003604138197709147,
+                                    0.7208216326348326,
+                                    0.6931025711494562,
+                                    3.5,
+                                    2.55,
+                                    3.5
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 18
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "d271ad49-1f48-4d28-9436-b4cb67411349": {
+                        "object_data": {
+                            "name": "TRAILER_d271ad49",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    28.466080636822678,
+                                    -35.81007683655788,
+                                    -5.020000000000003,
+                                    -0.003465541735309821,
+                                    0.003604138197709147,
+                                    0.7208216326348326,
+                                    0.6931025711494562,
+                                    18.6,
+                                    2.7,
+                                    4.5
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": "vehicle_transport"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 399
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "372245ff-7e11-477c-81d7-86ace5fd7784": {
+                        "object_data": {
+                            "name": "TRAILER_372245ff",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    29.24445879587755,
+                                    -54.05429117162333,
+                                    -5.26,
+                                    -0.0034655417353098273,
+                                    0.003604138197709153,
+                                    0.7208216326348326,
+                                    0.6931025711494562,
+                                    6,
+                                    2.55,
+                                    3.5
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 8
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "70f71032-807c-4299-bc89-394fd67f659e": {
+                        "object_data": {
+                            "name": "TRUCK_70f71032",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    32.999840329399184,
+                                    -53.365828309155496,
+                                    -5.095000000000002,
+                                    -0.0070695915622040195,
+                                    0.00013859472994715277,
+                                    0.720829950019674,
+                                    0.693075886769464,
+                                    2.5500000000000003,
+                                    2.7,
+                                    3.75
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 37
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "96d9b66e-f0ff-465e-9e02-7e4142d0311c": {
+                        "object_data": {
+                            "name": "TRAILER_96d9b66e",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    33.17536346943885,
+                                    -58.12820664010069,
+                                    -4.921890510904232,
+                                    -0.0070695915622040195,
+                                    0.00013859472994715277,
+                                    0.720829950019674,
+                                    0.693075886769464,
+                                    7.48,
+                                    2.7,
+                                    4
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 2
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "fada514b-cf34-4559-a0c5-94e681126740": {
+                        "object_data": {
+                            "name": "CAR_fada514b",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    15.585363331333133,
+                                    -48.14054245226639,
+                                    -6.629132096503149,
+                                    -0.0004298000905758473,
+                                    -0.014134659763774152,
+                                    -0.6851473173480754,
+                                    0.7282672450385091,
+                                    4.5,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 0
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "bb87d564-e0f3-4e90-ba17-2d3df24a304d": {
+                        "object_data": {
+                            "name": "CAR_bb87d564",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    45.1487953424795,
+                                    -2.8403167974477865,
+                                    -6.095949444146372,
+                                    -0.017009613619582097,
+                                    -0.018314553694434264,
+                                    0.10507273655864438,
+                                    0.9941503760496014,
+                                    4.75,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 7
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "bb0812d9-f40b-487d-a00c-848aa14644e0": {
+                        "object_data": {
+                            "name": "VAN_bb0812d9",
+                            "type": "VAN",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    -42.26466436209267,
+                                    -8.133039183000294,
+                                    -7.750738014265602,
+                                    -0.00022498312550624182,
+                                    -0.014997750101247816,
+                                    0.014997750101247828,
+                                    0.9997750168744938,
+                                    7,
+                                    2.24,
+                                    2.67
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 7
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "ddb8edbc-d21a-4ccf-a28e-6e5f2b99255a": {
+                        "object_data": {
+                            "name": "CAR_ddb8edbc",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    -23.65442909605674,
+                                    -11.11,
+                                    -8.147854006858068,
+                                    -0.0005248731358057662,
+                                    -0.014990251288672624,
+                                    0.03498891798200576,
+                                    0.999275133530772,
+                                    4.7,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 0
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "7e3876bf-b7d2-4f6c-ad03-47e4449d62ef": {
+                        "object_data": {
+                            "name": "CAR_7e3876bf",
+                            "type": "CAR",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    -7.930000000000001,
+                                    -6.59,
+                                    -7.8100000000000005,
+                                    -0.0005248731358057662,
+                                    -0.014990251288672624,
+                                    0.03498891798200576,
+                                    0.999275133530772,
+                                    4.7,
+                                    2.09,
+                                    1.45
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 0
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": [
+                                        {
+                                            "name": "is_electric",
+                                            "val": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "ac7b81f7-0a3d-40ee-970f-7774e5b85c97": {
+                        "object_data": {
+                            "name": "TRAILER_ac7b81f7",
+                            "type": "TRAILER",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    -12.775742270289541,
+                                    -10.003938466405755,
+                                    -6.72675169362799,
+                                    -0.0005248731358057662,
+                                    -0.014990251288672624,
+                                    0.03498891798200576,
+                                    0.999275133530772,
+                                    4.75,
+                                    2.55,
+                                    3.96
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 247
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    },
+                    "bd6774d4-a2c4-4efa-a82f-e9efeb093f4e": {
+                        "object_data": {
+                            "name": "TRUCK_bd6774d4",
+                            "type": "TRUCK",
+                            "cuboid": {
+                                "name": "shape3D",
+                                "val": [
+                                    -9.41048535912058,
+                                    -9.76964684536563,
+                                    -6.91,
+                                    -0.0005248731358057662,
+                                    -0.014990251288672624,
+                                    0.03498891798200576,
+                                    0.999275133530772,
+                                    2.5100000000000002,
+                                    2.5500000000000003,
+                                    3.4
+                                ],
+                                "attributes": {
+                                    "text": [
+                                        {
+                                            "name": "occlusion_level",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "body_color",
+                                            "val": ""
+                                        },
+                                        {
+                                            "name": "sensor_id",
+                                            "val": "s110_lidar_ouster_south"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "val": ""
+                                        }
+                                    ],
+                                    "num": [
+                                        {
+                                            "name": "num_points",
+                                            "val": 7
+                                        },
+                                        {
+                                            "name": "number_of_trailers",
+                                            "val": -1
+                                        }
+                                    ],
+                                    "boolean": []
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

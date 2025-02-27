@@ -1,0 +1,62 @@
+{
+    "openlabel": {
+        "metadata": {
+            "schema_version": "1.0.0"
+        },
+        "coordinate_systems": {},
+        "frames": {
+            "41": {
+                "frame_properties": {
+                    "timestamp": 1688625984.147113,
+                    "image_file_names": [
+                        "1688625984_130401634_s110_camera_basler_south1_8mm.jpg",
+                        "1688625984_157213415_s110_camera_basler_south2_8mm.jpg",
+                        "1688625984_130983644_s110_camera_basler_north_8mm.jpg",
+                        "1688625984_116776349_s110_camera_basler_east_8mm.jpg",
+                        "1688625984_152126297_vehicle_camera_basler_16mm.jpg"
+                    ],
+                    "point_cloud_file_names": [
+                        "1688625984_191314459_vehicle_lidar_robosense.pcd",
+                        "1688625984_147113148_s110_lidar_ouster_south.pcd",
+                        "1688625984_147113148_s110_lidar_ouster_south_and_vehicle_lidar_robosense_registered.pcd"
+                    ],
+                    "transforms": {
+                        "vehicle_lidar_robosense_to_s110_lidar_ouster_south": {
+                            "src": "vehicle_lidar_robosense",
+                            "dst": "s110_lidar_ouster_south",
+                            "transform_src_to_dst": {
+                                "matrix4x4": [
+                                    [
+                                        -0.02145588111839586,
+                                        -0.9992990476193985,
+                                        0.030676678314261817,
+                                        32.33369571879611
+                                    ],
+                                    [
+                                        0.999761235332926,
+                                        -0.02131861687046449,
+                                        0.00479467416123041,
+                                        -27.728975029935814
+                                    ],
+                                    [
+                                        -0.004137328971122652,
+                                        0.03077222776618197,
+                                        0.9995178600241674,
+                                        -5.464330563157492
+                                    ],
+                                    [
+                                        0,
+                                        0,
+                                        0,
+                                        1
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                },
+                "objects": {}
+            }
+        }
+    }
+}

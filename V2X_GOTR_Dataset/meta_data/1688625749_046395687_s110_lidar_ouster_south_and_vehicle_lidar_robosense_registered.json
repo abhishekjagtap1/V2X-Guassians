@@ -1,0 +1,62 @@
+{
+    "openlabel": {
+        "metadata": {
+            "schema_version": "1.0.0"
+        },
+        "coordinate_systems": {},
+        "frames": {
+            "80": {
+                "frame_properties": {
+                    "timestamp": 1688625749.0463958,
+                    "image_file_names": [
+                        "1688625749_047098597_s110_camera_basler_south1_8mm.jpg",
+                        "1688625749_053392904_s110_camera_basler_south2_8mm.jpg",
+                        "1688625749_049630350_s110_camera_basler_north_8mm.jpg",
+                        "1688625749_046926548_s110_camera_basler_east_8mm.jpg",
+                        "1688625749_052115369_vehicle_camera_basler_16mm.jpg"
+                    ],
+                    "point_cloud_file_names": [
+                        "1688625749_092582464_vehicle_lidar_robosense.pcd",
+                        "1688625749_046395687_s110_lidar_ouster_south.pcd",
+                        "1688625749_046395687_s110_lidar_ouster_south_and_vehicle_lidar_robosense_registered.pcd"
+                    ],
+                    "transforms": {
+                        "vehicle_lidar_robosense_to_s110_lidar_ouster_south": {
+                            "src": "vehicle_lidar_robosense",
+                            "dst": "s110_lidar_ouster_south",
+                            "transform_src_to_dst": {
+                                "matrix4x4": [
+                                    [
+                                        -0.05843251065848989,
+                                        0.9947745621959438,
+                                        -0.08372103741603486,
+                                        12.87096349415951
+                                    ],
+                                    [
+                                        -0.9961467606062804,
+                                        -0.05260738956959497,
+                                        0.07017188821953334,
+                                        5.446880731186575
+                                    ],
+                                    [
+                                        0.0654008641515327,
+                                        0.08749875982289379,
+                                        0.9940154395167601,
+                                        -6.544673883973883
+                                    ],
+                                    [
+                                        0.0,
+                                        0.0,
+                                        0.0,
+                                        1.0
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                },
+                "objects": {}
+            }
+        }
+    }
+}

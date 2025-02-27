@@ -1,5 +1,6 @@
 
-## V2X-Gaussians: Gaussian Splatting for Multi-Agent Cooperative Dynamic Scene Reconstruction
+# V2X-Gaussians: Gaussian Splatting for Multi-Agent Cooperative Dynamic Scene Reconstruction
+### [Project Page]() | [Paper]() | [Unofficial Implementation](https://github.com/abhishekjagtap1/Collaborative-dynmaic-gaussian-spaltting/tree/dev_depth_flow_supervision)
 
 Abstract— Recent advances in neural rendering, such as
 NeRF and Gaussian Splatting, have shown great potential
@@ -20,6 +21,8 @@ transportation systems.
 
 ##  Results - Demo
 
+**Left Column - Infrastructure View 1, Middle Column - EGO-CAV and Right Coloumn - Infrastructure View 2**
+
 ![GT Video](assets/Results_U-Turn_scene.gif)
 
 ## Pipeline Overview
@@ -36,7 +39,12 @@ transportation systems.
 
 ## Installation
 
+<details> <summary>Clone this repository</summary>
 
+```bash
+git clone https://github.com/abhishekjagtap1/V2X-Guassians.git
+```
+</details>
 <details> <summary>Set up the conda environment</summary>
 
 ```
@@ -118,7 +126,7 @@ Extract the contents and locate the path to the output scene directory.
 To evaluate and render using these pre-trained checkpoints, run the following commands:
 
 ```
-python render.py --model_path output/u_turn_only_v2x_guided_training/ --configs arguments/multipleview/v2x_multi_agents/3dgs_config.py --skip_video --skip_train
+python render.py --model_path output/u_turn_only_v2x_guided_training/ --configs arguments/multi_agents/v2x_gaussian.py --skip_video --skip_train
 python metrics.py --model_path "output/u_turn_only_v2x_guided_training" 
 ```
 Note: In ```cfg_args``` file, source_path needs to be changed according to your local system path. 
@@ -150,13 +158,18 @@ If you are interested in experimenting with foundational priors such as flow or 
 Note: we provide support for different rasterizers  such as flow or feature rasterizer in different branches, refer to `dev_depth_flow_supervision` and `dev_feature_rasterization`.
 
 For easy benchmarking of RT-4dgs, we also provide a dedicated branch named `vanilla_4DGS`
+
+TODO: 
+- [ ]Code Cleanup for Emernerf
+- [ ] Unofficial implementation of Emernerf on V2X-GOTR benchamrk is available here https://github.com/abhishekjagtap1/Self_supervised-neural-fields-for-collaborative-perception/tree/main
+
 ## Contributions
 
 **This project is still under development. Please feel free to raise issues or submit pull requests to contribute to our codebase.**
 
 ---
 
-Some source code of ours is borrowed from [4D Gaussians](https://github.com/hustvl/4DGaussians/tree/master), [HexPlane](https://github.com/Caoang327/HexPlane), [TiNeuVox](https://github.com/hustvl/TiNeuVox) and [MVGS](https://github.com/xiaobiaodu/MVGS). We sincerely appreciate the excellent works of these authors.
+Some source code of ours is borrowed from [4D Gaussians](https://github.com/hustvl/4DGaussians/tree/master), [HexPlane](https://github.com/Caoang327/HexPlane), [TiNeuVox](https://github.com/hustvl/TiNeuVox), [MVGS](https://github.com/xiaobiaodu/MVGS) and [Coopdet3D](https://github.com/tum-traffic-dataset/coopdet3d). We sincerely appreciate the excellent works of these authors.
 
 
 

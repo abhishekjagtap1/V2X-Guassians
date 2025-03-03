@@ -1,7 +1,8 @@
 # Vehicle-to-Everything Gaussians on The Road (V2X-GOTR) Dataset Preparation
 
 ## Overview
-The **Vehicle-to-Everything Gaussians on the Road (V2X-GOTR) Dataset** is built upon the [TUMTraf-V2X](https://innovation-mobility.com/tumtraf-dataset) dataset by extracting and organizing various components to enable high-fidelity dynamic scene reconstruction.
+The **Vehicle-to-Everything Gaussians on the Road (V2X-GOTR) Evaluation benchmark** is built upon the [TUMTraf-V2X](https://innovation-mobility.com/tumtraf-dataset) dataset. It systematically extracts, processes, and organizes key components from the dataset to support high-fidelity dynamic scene reconstruction. In
+order to bolster future research in neural scene rendering and off-axis novel view synthesis in the V2X ecosystem, we provide a consistent benchmark for training and evaluation using just 3 Steps
 
 ## 1. Data Directory Setup
 To organize the dataset properly, follow these steps:
@@ -29,8 +30,8 @@ The selected scenarios are as follows:
 | Scene Name                      |
 |---------------------------------|
 | Ego Vehicle Occlusion           |
-| Cyclist in Blind Spot           |
-| Pedestrians Crossing            |
+| Pedestrian Crossing             |
+| Sharp U-Turn Maneuver           |
 | U-Turn Maneuver                 |
 | RSU Occlusion                   |
 | Far Distance Pedestrian         |
@@ -61,7 +62,7 @@ python V2X_GOTR_Dataset/V2X_GOTR_data_preprocessor.py --dataset "path_to_TUMTRAF
 After preprocessing, all the scenes will be organized in a structured directory as follows:
 ```
 ├── data
-|   | bicycle_occlusion
+|   | pedestrian_crossing
 │       | cam1
 |     		├── frame_00001.jpg
 │     		├── frame_00002.jpg
@@ -86,11 +87,15 @@ After preprocessing, all the scenes will be organized in a structured directory 
 ```
 ## 3. Enabling V2X-GS Training on specific scenes
 
-Inorder to train V2X-Gaussians on specific scenes (for instance on bicycle occlusion), follow the below instructions to enable a robust lidar initialization
+Inorder to train V2X-Gaussians on specific scenes (for instance on pedestrian crossing), follow the below instructions to enable a robust lidar initialization
 ```shell
 python V2X_GOTR_Dataset/lidar_initialization_per_scene.py \
     --lidar_input_path "/path/to/lidar/frames" \
     --combined_output_path "/path/to/save/combined.pcd" \
     --voxel_size 0.05 \
-    --downsampled_output_path "/path/to/save/lidar_downsampled.ply"
+    --downsampled_output_path "/data/pedestrian_crossing/lidar_downsampled.ply"
+```
 
+Important Notes: 
+1. It is recomended to keep the ```voxel size``` to ```0.05```, inorder to reproduce the results in the paper. 
+2. It is recomended to save the lidar initialization ```downsampled_output_path``` in ```data/example_scene``` directory.

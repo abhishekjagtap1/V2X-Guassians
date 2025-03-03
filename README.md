@@ -19,16 +19,21 @@ V2X-data exchange, highlighting the benefits of incorporating
 roadside infrastructure into neural rendering for intelligent
 transportation systems. 
 
-##  Results - Demo
+##  Results Demo 1 - Multi-Agent Cooperative Dynamic Scene Reconsctruction
 
 **Left Column - Infrastructure View 1, Middle Column - EGO-CAV and Right Coloumn - Infrastructure View 2**
 
 ![GT Video](assets/Results_U-Turn_scene.gif)
 
-## Pipeline Overview
-![](./assets/pipeline_pictures.jpg "")
 
-# News
+##  Results Demo 2 - Enabling Novel View Synthesis with Infrastructure-Aided V2X Communication 
+This demo showcases camera pose interpolation from Infrastructure Camera 1 to Infrastructure Camera 2, and finally to the Ego-Camera, enabling seamless viewpoint transitions.
+
+Note: The synthesized view may appear incomplete or discontinuous due to the limited coverage of the scene by only three agents. The sparsity of these viewpoints results in gaps between perspectives, affecting the smoothness of the interpolation.
+
+![](./assets/novel_view.gif "")
+
+## News
 - [x] Release main training code 
 - [x] Release data processing code
 - [x] Release preprocessed V2X-GOTR evaluation benchmark
@@ -50,6 +55,7 @@ git clone https://github.com/abhishekjagtap1/V2X-Guassians.git
 ```
 conda create -y --name v2x_gaussian python=3.9
 conda activate v2x_gaussian
+# Replace cu118 with 121 if using CUDA 12.x 
 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 pip install submodules/depth-diff-gaussian-rasterization
@@ -134,24 +140,22 @@ For example: source_path='/home/uchihadj/PycharmProjects/try/data/u_turn_maneuve
 
 
 
-## Viewer
+## 4D SIBR Viewer
 [Watch me](./docs/viewer_usage.md)
 ## Scripts
 
 There are some helpful scripts, please feel free to use them.
 
-1. `export_perframe_3DGS.py`:
-get all 3D Gaussians point clouds at each timestamps.
+1. `scene/novel_view_utils.py` contains various novel view pose functions such as `add_noise_to_pose` that adds communication noise to pose, feel free to use it when rendering
 
-usage:
+TODO:
 
-```
-python export_perframe_3DGS.py --iteration 14000 --configs arguments/multipleview/v2x_multi_agents/3dgs_config.py --model_path output/Experiment_name 
-```
-2. `scene/novel_view_utils.py` contains various novel view pose functions such as `add_noise_to_pose` that adds communication noise to pose, feel free to use it when rendering
+## Pipeline Overview
+![](./assets/pipeline_pictures.jpg "")
 
 
-### Miscellaneous
+
+## Miscellaneous
 
 If you are interested in experimenting with foundational priors such as flow or 2d features and depth please refer to the unoffical experimental implementation at https://github.com/abhishekjagtap1/Collaborative-dynmaic-gaussian-spaltting/tree/dev_depth_flow_supervision
 
@@ -160,7 +164,7 @@ Note: we provide support for different rasterizers  such as flow or feature rast
 For easy benchmarking of RT-4dgs, we also provide a dedicated branch named `vanilla_4DGS`
 
 TODO: 
-- [ ]Code Cleanup for Emernerf
+- [ ] Code Cleanup for Emernerf
 - [ ] Unofficial implementation of Emernerf on V2X-GOTR benchamrk is available here https://github.com/abhishekjagtap1/Self_supervised-neural-fields-for-collaborative-perception/tree/main
 
 ## Contributions

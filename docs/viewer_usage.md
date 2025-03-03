@@ -16,9 +16,9 @@ cd SIBR_viewers
 cmake -Bbuild . -DCMAKE_BUILD_TYPE=Release # add -G Ninja to build faster
 cmake --build build -j24 --target install
 ```
-If you train the 4D-GS on locally:
+If you train the V2X-Gaussians locally, use the following command to visualize training:
 ```python
-./viewers/bin/SIBR_remoteGaussian_app.exe --port 6018 # port should be same with your trainging code.
+./viewers/bin/SIBR_remoteGaussian_app --port 6018 # port should be same with your trainging code.
 
 ```
 Visualizing Trained Model 
@@ -26,13 +26,15 @@ Visualizing Trained Model
 ./install/bin/SIBR_gaussianViewer_app -m "path_to_trained_model"
 ```
 
-Note: Camera keys for SIBR Viewer are available at ```.submodules/SIBR_viewers/camera_pos```, allowing seamless switching between agents' perspectives.
+
 
 # Demo - 1: V2X Agents Collaborative View
 
 ![View](/assets/Collaborative_view.gif) 
 
 # Demo - 2: Dynamic Scene Visualization of Infrastructure and Ego-CAV 
+
+Note: Camera keys for SIBR Viewer are available at ```.submodules/SIBR_viewers/camera_pos```, allowing seamless switching between agents' perspectives.
 
 ![](/assets/Dynamic_video.gif "")
 

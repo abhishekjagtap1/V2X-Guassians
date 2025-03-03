@@ -27,11 +27,12 @@ transportation systems.
 
 
 ##  Results Demo 2 - Enabling Novel View Synthesis with Infrastructure-Aided V2X Communication 
-This demo showcases camera pose interpolation from Infrastructure Camera 1 to Infrastructure Camera 2, and finally to the Ego-Camera, enabling seamless viewpoint transitions.
+This demo showcases camera pose interpolation among V2X agents, enabling seamless viewpoint transitions.
 
 Note: The synthesized view may appear incomplete or discontinuous due to the limited coverage of the scene by only three agents. The sparsity of these viewpoints results in gaps between perspectives, affecting the smoothness of the interpolation.
 
-![](./assets/novel_view.gif "")
+  
+![](./assets/novel_view_2.gif "")
 
 ## News
 - [x] Release main training code 

@@ -36,6 +36,9 @@ Visualizing Trained Model
 
 Note: Camera keys for SIBR Viewer are available at ```.submodules/SIBR_viewers/camera_pos```, allowing seamless switching between agents' perspectives.
 
+
+![](/assets/novel_view.gif "") 
+
 ![](/assets/Dynamic_video.gif "")
 
 

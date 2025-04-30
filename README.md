@@ -23,7 +23,7 @@ transportation systems.
 
 **Left Column - Infrastructure View 1, Middle Column - EGO-CAV and Right Coloumn - Infrastructure View 2**
 
-![GT Video](assets/Results_U-Turn_scene.gif)
+![GT Video](assets/Demo_Video.gif)
 
 
 ##  Results Demo 2 - Enabling Novel View Synthesis with Infrastructure-Aided V2X Communication 
@@ -35,6 +35,7 @@ Note: The synthesized view may appear incomplete or discontinuous due to the lim
 ![](./assets/novel_view_2.gif "")
 
 ## News
+- [x] Accepted to IEEE IV 2025 
 - [x] Release main training code 
 - [x] Release data processing code
 - [x] Release preprocessed V2X-GOTR evaluation benchmark

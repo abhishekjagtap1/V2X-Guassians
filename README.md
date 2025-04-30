@@ -146,14 +146,13 @@ For example: source_path='/home/uchihadj/PycharmProjects/try/data/u_turn_maneuve
 [Watch me](./docs/viewer_usage.md)
 ## Scripts
 
-There are some helpful scripts, please feel free to use them.
+There are few helpful scripts:
 
 1. `scene/novel_view_utils.py` contains various novel view pose functions such as `add_noise_to_pose` that adds communication noise to pose, feel free to use it when rendering
 
-TODO:
 
 ## Pipeline Overview
-![](./assets/pipeline_pictures.jpg "")
+![](./assets/pipeline.jpg "")
 
 
 
@@ -169,17 +168,11 @@ TODO:
 - [ ] Code Cleanup for Emernerf
 - [ ] Unofficial implementation of Emernerf on V2X-GOTR benchamrk is available here https://github.com/abhishekjagtap1/Self_supervised-neural-fields-for-collaborative-perception/tree/main
 
-## Contributions
-
-**This project is still under development. Please feel free to raise issues or submit pull requests to contribute to our codebase.**
-
----
-
-Some source code of ours is borrowed from [4D Gaussians](https://github.com/hustvl/4DGaussians/tree/master), [HexPlane](https://github.com/Caoang327/HexPlane), [TiNeuVox](https://github.com/hustvl/TiNeuVox), [MVGS](https://github.com/xiaobiaodu/MVGS) and [Coopdet3D](https://github.com/tum-traffic-dataset/coopdet3d). We sincerely appreciate the excellent works of these authors.
 
 
+## Citation
 
-## Acknoledgements
+If you find this code useful for your research, please use the following BibTeX entry.
 
 TODO:
 ```

@@ -160,7 +160,7 @@ class HexPlaneField(nn.Module):
     def get_density(self, pts: torch.Tensor, timestamps: Optional[torch.Tensor] = None):
         """Computes and returns the densities."""
         # breakpoint()
-        pts = normalize_aabb(pts, self.aabb)
+        pts = normalize_aabb(pts, self.aabb.to(pts.device))
         pts = torch.cat((pts, timestamps), dim=-1)  # [n_rays, n_samples, 4]
 
         pts = pts.reshape(-1, pts.shape[-1])

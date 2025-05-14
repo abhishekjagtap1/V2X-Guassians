@@ -15,7 +15,6 @@ from scene.grid import DenseGrid
 from neuralop.models.fno import FNO
 
 
-
 class Deformation(nn.Module):
     def __init__(self, D=8, W=256, input_ch=27, input_ch_time=9, grid_pe=0, skips=[], args=None):
         super(Deformation, self).__init__()
@@ -64,39 +63,7 @@ class Deformation(nn.Module):
             self.feature_out.append(nn.ReLU())
             self.feature_out.append(nn.Linear(self.W, self.W))
         self.feature_out = nn.Sequential(*self.feature_out)
-
-        self.pos_deform = FNO(
-            n_modes=(12, 12, 12),  # For 2D data
-            in_channels=128,   # Input channels (feat_dim)
-            out_channels=3,   # Total output channels for all tasks
-            hidden_channels=128
-        )
-        # self.scales_deform = FNO(
-        #     n_modes=(12, 12, 12),  # For 2D data
-        #     in_channels=128,   # Input channels (feat_dim)
-        #     out_channels=3,   # Total output channels for all tasks
-        #     hidden_channels=128
-        # )
-        # self.rotations_deform = FNO(
-        #     n_modes=(12, 12, 12),  # For 2D data
-        #     in_channels=128,   # Input channels (feat_dim)
-        #     out_channels=4,   # Total output channels for all tasks
-        #     hidden_channels=128
-        # )
-        # self.opacity_deform = FNO(
-        #     n_modes=(12, 12, 12),  # For 2D data
-        #     in_channels=128,   # Input channels (feat_dim)
-        #     out_channels=1,   # Total output channels for all tasks
-        #     hidden_channels=128
-        # )
-        # self.shs_deform = FNO(
-        #     n_modes=(12, 12, 12),  # For 2D data
-        #     in_channels=128,   # Input channels (feat_dim)
-        #     out_channels=16*3,   # Total output channels for all tasks
-        #     hidden_channels=128
-        # )
-
-        # #self.pos_deform = nn.Sequential(nn.ReLU(), nn.Linear(self.W, self.W), nn.ReLU(), nn.Linear(self.W, 3))
+        self.pos_deform = nn.Sequential(nn.ReLU(), nn.Linear(self.W, self.W), nn.ReLU(), nn.Linear(self.W, 3))
         self.scales_deform = nn.Sequential(nn.ReLU(), nn.Linear(self.W, self.W), nn.ReLU(), nn.Linear(self.W, 3))
         self.rotations_deform = nn.Sequential(nn.ReLU(), nn.Linear(self.W, self.W), nn.ReLU(), nn.Linear(self.W, 4))
         self.opacity_deform = nn.Sequential(nn.ReLU(), nn.Linear(self.W, self.W), nn.ReLU(), nn.Linear(self.W, 1))
@@ -115,7 +82,6 @@ class Deformation(nn.Module):
             hidden = torch.cat([grid_feature], -1)
 
         hidden = self.feature_out(hidden)
-        #hidden_128 = hidden
 
         return hidden
 
@@ -138,8 +104,6 @@ class Deformation(nn.Module):
 
     def forward_dynamic(self, rays_pts_emb, scales_emb, rotations_emb, opacity_emb, shs_emb, time_feature, time_emb):
         hidden = self.query_time(rays_pts_emb, scales_emb, rotations_emb, time_feature, time_emb)
-
-
         if self.args.static_mlp:
             mask = self.static_mlp(hidden)
         elif self.args.empty_voxel:
@@ -147,40 +111,10 @@ class Deformation(nn.Module):
         else:
             mask = torch.ones_like(opacity_emb[:, 0]).unsqueeze(-1)
         # breakpoint()
-
-        #aabb_min = torch.tensor([-168.2285, -216.6549, -83.4302]).to(hidden.device)  # Minimum bounds of AABB
-        #aabb_max = torch.tensor([198.1941, 161.2988, 12.6960]).to(hidden.device)
-
-        aabb_min = torch.tensor([-152.2546, -244.4493,  -38.4792]).to(hidden.device)  # Minimum bounds of AABB
-        aabb_max = torch.tensor([221.9898,  153.5945,   38.6139]).to(hidden.device)
-
-        print("definetely code didnt come here")
-
-        grid_features = compute_grid_features_128d(hidden, rays_pts_emb[:, :3], aabb_min, aabb_max, grid_resolution=64)
-
-        #print("befor giving it to FNO", grid_features.shape) #([1, 4, 128, 128, 128])
         if self.args.no_dx:
             pts = rays_pts_emb[:, :3]
         else:
-            #dx = self.pos_deform(hidden)
-
-            dx_grid = self.pos_deform(grid_features)
-            #print("dx_grid", dx_grid.shape)
-            pts_normalized_ndc = 2 * (rays_pts_emb[:, :3] - aabb_min) / (aabb_max - aabb_min) - 1  # Normalize to [-1, 1]
-            pts_normalized = pts_normalized_ndc.unsqueeze(0).unsqueeze(0).unsqueeze(0) 
-            # Step 5: Interpolate back to 3DGS points (PyTorch version)
- # Shape: (1, 1, 1, n_points, 3)
-            #dx_grid = dx_grid #.permute(0, 4, 1, 2, 3)  # Shape: (1, 3, grid_resolution, grid_resolution, grid_resolution)
-            dx = F.grid_sample(
-                dx_grid,
-                pts_normalized, #rays_pts_emb[:, :3].unsqueeze(0).unsqueeze(0).unsqueeze(0),
-                mode='bilinear',
-                padding_mode='border',
-                align_corners=True
-            )  # Shape: (1, 3, 1, 1, n_points)
-            dx = dx.squeeze().permute(1, 0)  # Shape: (n_points, 3)
-            #print("dx.shape after interpolation", dx.shape)
-
+            dx = self.pos_deform(hidden)
             pts = torch.zeros_like(rays_pts_emb[:, :3])
             pts = rays_pts_emb[:, :3] * mask + dx
         if self.args.no_ds:
@@ -188,21 +122,6 @@ class Deformation(nn.Module):
             scales = scales_emb[:, :3]
         else:
             ds = self.scales_deform(hidden)
-            # ds_grid = self.scales_deform(grid_features)
-            # print("ds_grid", ds_grid.shape)
-            # # Step 5: Interpolate back to 3DGS points (PyTorch version)
-            # #pts_normalized = 2 * (hidden[:, :3] - aabb_min) / (aabb_max - aabb_min) - 1  # Normalize to [-1, 1]
-            # #pts_normalized = pts_normalized.unsqueeze(0).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, 1, n_points, 3)
-            # #dx_grid = dx_grid #.permute(0, 4, 1, 2, 3)  # Shape: (1, 3, grid_resolution, grid_resolution, grid_resolution)
-            # ds = F.grid_sample(
-            #     ds_grid,
-            #     pts_normalized,
-            #     mode='bilinear',
-            #     padding_mode='border',
-            #     align_corners=True
-            # )  # Shape: (1, 3, 1, 1, n_points)
-            # ds = ds.squeeze().permute(1, 0)  # Shape: (n_points, 3)
-            # print("ds.shape after interpolation", ds.shape)
 
             scales = torch.zeros_like(scales_emb[:, :3])
             scales = scales_emb[:, :3] * mask + ds
@@ -211,21 +130,6 @@ class Deformation(nn.Module):
             rotations = rotations_emb[:, :4]
         else:
             dr = self.rotations_deform(hidden)
-            # dr_grid = self.rotations_deform(grid_features)
-            # print("ds_grid", dr_grid.shape)
-            # # Step 5: Interpolate back to 3DGS points (PyTorch version)
-            # #pts_normalized = 2 * (hidden[:, :3] - aabb_min) / (aabb_max - aabb_min) - 1  # Normalize to [-1, 1]
-            # #pts_normalized = pts_normalized.unsqueeze(0).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, 1, n_points, 3)
-            # #dx_grid = dx_grid #.permute(0, 4, 1, 2, 3)  # Shape: (1, 3, grid_resolution, grid_resolution, grid_resolution)
-            # dr = F.grid_sample(
-            #     dr_grid,
-            #     pts_normalized ,
-            #     mode='bilinear',
-            #     padding_mode='border',
-            #     align_corners=True
-            # )  # Shape: (1, 3, 1, 1, n_points)
-            # dr = dr.squeeze().permute(1, 0)  # Shape: (n_points, 3)
-            # print("dx.shape after interpolation", dr.shape)
 
             rotations = torch.zeros_like(rotations_emb[:, :4])
             if self.args.apply_rotation:
@@ -237,21 +141,6 @@ class Deformation(nn.Module):
             opacity = opacity_emb[:, :1]
         else:
             do = self.opacity_deform(hidden)
-            # do_grid = self.opacity_deform(grid_features)
-            # print("ds_grid", do_grid.shape)
-            # # Step 5: Interpolate back to 3DGS points (PyTorch version)
-            # #pts_normalized = 2 * (hidden[:, :3] - aabb_min) / (aabb_max - aabb_min) - 1  # Normalize to [-1, 1]
-            # #pts_normalized = pts_normalized.unsqueeze(0).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, 1, n_points, 3)
-            # #dx_grid = dx_grid #.permute(0, 4, 1, 2, 3)  # Shape: (1, 3, grid_resolution, grid_resolution, grid_resolution)
-            # do = F.grid_sample(
-            #     do_grid,
-            #     pts_normalized,
-            #     mode='bilinear',
-            #     padding_mode='border',
-            #     align_corners=True
-            # )  # Shape: (1, 3, 1, 1, n_points)
-            # do= do.squeeze().permute(1, 0)
-            # print("dx.shape after interpolation", do.shape)
 
             opacity = torch.zeros_like(opacity_emb[:, :1])
             opacity = opacity_emb[:, :1] * mask + do
@@ -259,22 +148,6 @@ class Deformation(nn.Module):
             shs = shs_emb
         else:
             dshs = self.shs_deform(hidden).reshape([shs_emb.shape[0], 16, 3])
-            # dshs_grid = self.shs_deform(grid_features)
-            # print("ds_grid", dshs_grid.shape)
-            # # Step 5: Interpolate back to 3DGS points (PyTorch version)
-            # #pts_normalized = 2 * (hidden[:, :3] - aabb_min) / (aabb_max - aabb_min) - 1  # Normalize to [-1, 1]
-            # #pts_normalized = pts_normalized.unsqueeze(0).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, 1, n_points, 3)
-            # #dx_grid = dx_grid #.permute(0, 4, 1, 2, 3)  # Shape: (1, 3, grid_resolution, grid_resolution, grid_resolution)
-            # dshs = F.grid_sample(
-            #     dshs_grid,
-            #     pts_normalized ,
-            #     mode='bilinear',
-            #     padding_mode='border',
-            #     align_corners=True
-            # )  # Shape: (1, 3, 1, 1, n_points)
-            # dshs= dshs.squeeze().permute(1, 0) #.reshape([dshs.shape[0],16,3])
-            # dshs = dshs.reshape(shs_emb.shape[0], 16, 3)
-            # print("dshs.shape after interpolation", dshs.shape)
 
             shs = torch.zeros_like(shs_emb)
             # breakpoint()

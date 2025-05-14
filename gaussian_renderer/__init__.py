@@ -117,11 +117,13 @@ def render(viewpoint_camera, pc : GaussianModel, pipe, bg_color : torch.Tensor, 
 
     # Rasterize visible Gaussians to image, obtain their radii (on screen). 
     # time3 = get_time()
+    if colors_precomp is not None:
+        shs_final = None
     rendered_image, radii, depth = rasterizer(
         means3D = means3D_final,
         means2D = means2D,
         shs = shs_final,
-        colors_precomp = colors_precomp,
+        colors_precomp = colors_precomp, # [N,3]
         opacities = opacity,
         scales = scales_final,
         rotations = rotations_final,

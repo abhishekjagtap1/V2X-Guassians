@@ -138,7 +138,7 @@ class GaussianModel:
         if self.active_sh_degree < self.max_sh_degree:
             self.active_sh_degree += 1
 
-    def create_from_pcd(self, pcd: BasicPointCloud, spatial_lr_scale: float):
+    def create_from_pcd(self, pcd: BasicPointCloud, spatial_lr_scale: float, time_line: int):
         self.spatial_lr_scale = spatial_lr_scale
         # breakpoint()
         fused_point_cloud = torch.tensor(np.asarray(pcd.points)).float().cuda()
@@ -408,6 +408,35 @@ class GaussianModel:
 
         return optimizable_tensors
 
+    def intersect_lines(self, ray1_origin, ray1_dir, ray2_origin, ray2_dir):
+        # Normalize direction vectors
+        ray1_dir = ray1_dir / torch.norm(ray1_dir)
+        ray2_dir = ray2_dir / torch.norm(ray2_dir)
+
+        # Cross product of direction vectors
+        cross_dir = torch.cross(ray1_dir, ray2_dir)
+        cross_dir_norm = torch.norm(cross_dir)
+
+        # Check if the rays are parallel
+        if cross_dir_norm < 1e-6:
+            return None  # Rays are parallel and do not intersect
+
+        # Line between the origins
+        origin_diff = ray2_origin - ray1_origin
+
+        # Calculate the distance along the cross product direction
+        t1 = torch.dot(torch.cross(origin_diff, ray2_dir), cross_dir) / (cross_dir_norm ** 2)
+        t2 = torch.dot(torch.cross(origin_diff, ray1_dir), cross_dir) / (cross_dir_norm ** 2)
+
+        # Closest points on each ray
+        closest_point1 = ray1_origin + t1 * ray1_dir
+        closest_point2 = ray2_origin + t2 * ray2_dir
+
+        # Midpoint between the two closest points as the intersection point
+        intersection_point = (closest_point1 + closest_point2) / 2.0
+
+        return intersection_point
+
     def densification_postfix(self, new_xyz, new_features_dc, new_features_rest, new_opacities, new_scaling,
                               new_rotation, new_deformation_table):
         d = {"xyz": new_xyz,
@@ -434,17 +463,43 @@ class GaussianModel:
         self.denom = torch.zeros((self.get_xyz.shape[0], 1), device="cuda")
         self.max_radii2D = torch.zeros((self.get_xyz.shape[0]), device="cuda")
 
-    def densify_and_split(self, grads, grad_threshold, scene_extent, N=2):
+    def densify_and_split(self, grads, grad_threshold, scene_extent, box3ds, N=2):
         n_init_points = self.get_xyz.shape[0]
         # Extract points that satisfy the gradient condition
         padded_grad = torch.zeros((n_init_points), device="cuda")
         padded_grad[:grads.shape[0]] = grads.squeeze()
         selected_pts_mask = torch.where(padded_grad >= grad_threshold, True, False)
 
+        """
+        Use this only during experiments with respect to Densifciation
+        """
+
+        # if box3ds is not None:
+        #     box_mask = torch.zeros_like(self.get_xyz[:, 0])
+        #     for box3d in box3ds:
+        #         x_min_3d, y_min_3d, z_min_3d, x_max_3d, y_max_3d, z_max_3d = box3d
+        #         mask_x = torch.logical_and(self.get_xyz[:, 0] > x_min_3d, self.get_xyz[:, 0] < x_max_3d)
+        #         mask_y = torch.logical_and(self.get_xyz[:, 1] > y_min_3d, self.get_xyz[:, 1] < y_max_3d)
+        #         mask_z = torch.logical_and(self.get_xyz[:, 2] > z_min_3d, self.get_xyz[:, 2] < z_max_3d)
+        #         mask_xyz = torch.logical_and(mask_x, mask_y)
+        #         mask_xyz = torch.logical_and(mask_xyz, mask_z)
+        #         box_mask = torch.logical_or(box_mask, mask_xyz)
+
+        #         if torch.any(box_mask):
+        #             print("Split - The mask contains at least one True value.")
+        #         else:
+        #             print("Split - The mask contain only False values.")
+
+        #     # Combine box3d mask with the selected points mask
+        #     #selected_pts_mask = torch.logical_or(selected_pts_mask, box_mask)
+
         # breakpoint()
         selected_pts_mask = torch.logical_and(selected_pts_mask,
                                               torch.max(self.get_scaling,
                                                         dim=1).values > self.percent_dense * scene_extent)
+
+        # selected_pts_mask = torch.logical_or(selected_pts_mask, box_mask)
+
         if not selected_pts_mask.any():
             return
         stds = self.get_scaling[selected_pts_mask].repeat(N, 1)
@@ -465,55 +520,47 @@ class GaussianModel:
             (selected_pts_mask, torch.zeros(N * selected_pts_mask.sum(), device="cuda", dtype=bool)))
         self.prune_points(prune_filter)
 
-    def densify_and_clone(self, grads, grad_threshold, scene_extent, density_threshold=20, displacement_scale=20,
-                          model_path=None, iteration=None, stage=None):
+    def densify_and_clone(self, grads, grad_threshold, scene_extent, box3ds, density_threshold=20,
+                          displacement_scale=20, model_path=None, iteration=None, stage=None):
+
+        # Extract points that are in my agent intersecting region
+        # the gradient condition
+        mask = torch.zeros_like(self.get_xyz[:, 0])
+        for box3d in box3ds:
+            x_min_3d, y_min_3d, z_min_3d, x_max_3d, y_max_3d, z_max_3d = box3d
+            mask_x = torch.logical_and(self.get_xyz[:, 0] > x_min_3d, self.get_xyz[:, 0] < x_max_3d)
+            mask_y = torch.logical_and(self.get_xyz[:, 1] > y_min_3d, self.get_xyz[:, 1] < y_max_3d)
+            mask_z = torch.logical_and(self.get_xyz[:, 2] > z_min_3d, self.get_xyz[:, 2] < z_max_3d)
+            mask_xyz = torch.logical_and(mask_x, mask_y)
+            mask_xyz = torch.logical_and(mask_xyz, mask_z)
+
+            mask = torch.logical_or(mask, mask_xyz)
+            # if torch.any(mask):
+            #     print("The mask contains at least one True value.")
+            # else:
+            #     print("The mask contain only False values.")
+
         grads_accum_mask = torch.where(torch.norm(grads, dim=-1) >= grad_threshold, True, False)
 
-        # 主动增加稀疏点云
-        # if not hasattr(self,"voxel_size"):
-        #     self.voxel_size = 8
-        # if not hasattr(self,"density_threshold"):
-        #     self.density_threshold = density_threshold
-        # if not hasattr(self,"displacement_scale"):
-        #     self.displacement_scale = displacement_scale
-        # point_cloud = self.get_xyz.detach().cpu()
-        # sparse_point_mask = self.downsample_point(point_cloud)
-        # _, low_density_points, new_points, low_density_index = addpoint(point_cloud[sparse_point_mask],density_threshold=self.density_threshold,displacement_scale=self.displacement_scale,iter_pass=0)
-        # sparse_point_mask = sparse_point_mask.to(grads_accum_mask)
-        # low_density_index = low_density_index.to(grads_accum_mask)
-        # if new_points.shape[0] < 100 :
-        #     self.density_threshold /= 2
-        #     self.displacement_scale /= 2
-        #     print("reduce diplacement_scale to: ",self.displacement_scale)
-        # global_mask = torch.zeros((point_cloud.shape[0]), dtype=torch.bool).to(grads_accum_mask)
-        # global_mask[sparse_point_mask] = low_density_index
-        # selected_pts_mask_grow = torch.logical_and(global_mask, grads_accum_mask)
-        # print("降采样点云:",sparse_point_mask.sum(),"选中的稀疏点云：",global_mask.sum(),"梯度累计点云：",grads_accum_mask.sum(),"选中增长点云：",selected_pts_mask_grow.sum())
-        # Extract points that satisfy the gradient condition
         selected_pts_mask = torch.logical_and(grads_accum_mask,
                                               torch.max(self.get_scaling,
                                                         dim=1).values <= self.percent_dense * scene_extent)
-        # breakpoint()
+        """
+        V2X Aware Cross-Ray-Densification
+
+        Subjecting Masked points for densification
+        """
+        selected_pts_mask = torch.logical_or(selected_pts_mask, mask)
+
         new_xyz = self._xyz[selected_pts_mask]
-        # - 0.001 * self._xyz.grad[selected_pts_mask]
         new_features_dc = self._features_dc[selected_pts_mask]
         new_features_rest = self._features_rest[selected_pts_mask]
         new_opacities = self._opacity[selected_pts_mask]
         new_scaling = self._scaling[selected_pts_mask]
         new_rotation = self._rotation[selected_pts_mask]
         new_deformation_table = self._deformation_table[selected_pts_mask]
-        # if opt.add_point:
-        # selected_xyz, grow_xyz = self.add_point_by_mask(selected_pts_mask_grow.to(self.get_xyz.device), self.displacement_scale)
         self.densification_postfix(new_xyz, new_features_dc, new_features_rest, new_opacities, new_scaling,
                                    new_rotation, new_deformation_table)
-        # print("被动增加点云：",selected_xyz.shape[0])
-        # print("主动增加点云：",selected_pts_mask.sum())
-        # if model_path is not None and iteration is not None:
-        #     point = combine_pointcloud(self.get_xyz.detach().cpu().numpy(), new_xyz.detach().cpu().numpy(), selected_xyz.detach().cpu().numpy())
-        #     write_path = os.path.join(model_path,"add_point_cloud")
-        #     os.makedirs(write_path,exist_ok=True)
-        #     o3d.io.write_point_cloud(os.path.join(write_path,f"iteration_{stage}{iteration}.ply"),point)
-        #     print("write output.")
 
     @property
     def get_aabb(self):
@@ -628,13 +675,84 @@ class GaussianModel:
         torch.cuda.empty_cache()
 
     def densify(self, max_grad, min_opacity, extent, max_screen_size, density_threshold, displacement_scale,
-                model_path=None, iteration=None, stage=None):
+                model_path=None, iteration=None, stage=None, cams=None, boxes=None):
         grads = self.xyz_gradient_accum / self.denom
         grads[grads.isnan()] = 0.0
 
-        self.densify_and_clone(grads, max_grad, extent, density_threshold, displacement_scale, model_path, iteration,
-                               stage)
-        self.densify_and_split(grads, max_grad, extent)
+        box3ds = []
+
+        """
+        Compute Dynmaic IoR from other V2X agent views
+        """
+
+        if cams is not None:
+            for i, cam_0 in enumerate(cams):
+                for j, cam_1 in enumerate(cams[i + 1:]):
+                    ray0_o = cam_0.rayo
+                    ray0_d = cam_0.rayd
+                    box0 = boxes[i]
+
+                    ray0_o_topleft = ray0_o[0, :, box0[0], box0[1]]
+                    ray0_d_topleft = ray0_d[0, :, box0[0], box0[1]]
+
+                    ray0_o_bottomright = ray0_o[0, :, box0[2], box0[3]]
+                    ray0_d_bottomright = ray0_d[0, :, box0[2], box0[3]]
+
+                    ray0_o_bottomleft = ray0_o[0, :, box0[2], box0[1]]
+                    ray0_d_bottomleft = ray0_d[0, :, box0[2], box0[1]]
+
+                    ray0_o_topright = ray0_o[0, :, box0[0], box0[3]]
+                    ray0_d_topright = ray0_d[0, :, box0[0], box0[3]]
+
+                    ray1_o = cam_1.rayo
+                    ray1_d = cam_1.rayd
+                    box1 = boxes[j + i + 1]
+
+                    ray1_o_topleft = ray1_o[0, :, box1[0], box1[1]]
+                    ray1_d_topleft = ray1_d[0, :, box1[0], box1[1]]
+
+                    ray1_o_bottomright = ray1_o[0, :, box1[2], box1[3]]
+                    ray1_d_bottomright = ray1_d[0, :, box1[2], box1[3]]
+
+                    ray1_o_bottomleft = ray1_o[0, :, box1[2], box1[1]]
+                    ray1_d_bottomleft = ray1_d[0, :, box1[2], box1[1]]
+
+                    ray1_o_topright = ray1_o[0, :, box1[0], box1[3]]
+                    ray1_d_topright = ray1_d[0, :, box1[0], box1[3]]
+
+                    topleft_intersect = self.intersect_lines(ray0_o_topleft, ray0_d_topleft, ray1_o_topleft,
+                                                             ray1_d_topleft)
+                    bottomright_intersect = self.intersect_lines(ray0_o_bottomright, ray0_d_bottomright,
+                                                                 ray1_o_bottomright, ray1_d_bottomright)
+                    bottomleft_interset = self.intersect_lines(ray0_o_bottomleft, ray0_d_bottomleft, ray1_o_bottomleft,
+                                                               ray1_d_bottomleft)
+                    topright_intersect = self.intersect_lines(ray0_o_topright, ray0_d_topright, ray1_o_topright,
+                                                              ray1_d_topright)
+
+                    region3d = [topleft_intersect, bottomright_intersect, bottomleft_interset, topright_intersect]
+                    ###Angent intersecting region
+                    if len(region3d) == 0 or None in region3d:
+                        print("No Region Found")
+                        continue
+
+                    region3d = torch.vstack(region3d)
+                    x_min_3d = torch.min(region3d[:, 0])
+                    y_min_3d = torch.min(region3d[:, 1])
+                    z_min_3d = torch.min(region3d[:, 2])
+
+                    x_max_3d = torch.max(region3d[:, 0])
+                    y_max_3d = torch.max(region3d[:, 1])
+                    z_max_3d = torch.max(region3d[:, 2])
+
+                    box3d = [x_min_3d, y_min_3d, z_min_3d, x_max_3d, y_max_3d, z_max_3d]
+                    box3ds.append(box3d)
+                    # print("Region found", box3ds)
+
+        # self.densify_and_clone(grads, max_grad, extent, box3ds)
+
+        self.densify_and_clone(grads, max_grad, extent, box3ds, density_threshold, displacement_scale, model_path,
+                               iteration, stage)
+        self.densify_and_split(grads, max_grad, extent, box3ds)
 
     def standard_constaint(self):
 

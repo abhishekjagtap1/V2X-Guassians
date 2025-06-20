@@ -39,7 +39,7 @@ Note: The synthesized view may appear incomplete or discontinuous due to the lim
 - [x] Release main training code 
 - [x] Release data processing code
 - [x] Release preprocessed V2X-GOTR evaluation benchmark
-- [ ] Release rendering results checkpoints
+- [x] Release rendering results checkpoints
 - [ ] Support for integrating foundational priors like depth, optical flow, and semantic features, along with their corresponding differentiable rasterizers
 
 

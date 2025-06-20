@@ -83,20 +83,20 @@ The V2X-GOTR data loader, located at `scene/V2XGOTR_dataset.py`, is well-documen
 
 To train on V2X-GOTR scenes, use the following command:
 ```
-python train_v2x_gaussian.py -s "path_to_V2X_GOTR_Scene" --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py --checkpoint_iterations 40000
+python train_v2x_gaussians.py -s "path_to_V2X_GOTR_Scene" --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py --checkpoint_iterations 40000
 ```
 ### Training with Checkpoints
 
 If you want to continue training from a specific checkpoint, run:
 
 ```
-python train_v2x_gaussian.py -s "path_to_V2X_GOTR_Scene"  --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py --start_checkpoint "output/Experiment_Name/chkpnt_fine_5000.pth" # change it.
+python train_v2x_gaussians.py -s "path_to_V2X_GOTR_Scene"  --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py --start_checkpoint "output/Experiment_Name/chkpnt_fine_5000.pth" # change it.
 ```
 Replace output/Experiment_Name/chkpnt_fine_5000.pth with the actual checkpoint path.
 
 ### Quick Training on a Example Scene
 
-Download the example scenario from the following link: [here](https://www.dropbox.com/scl/fi/k1duzi7fu13ppfno6fgyn/u_turn_maneuver.zip?rlkey=r6ppbl5m2rket1ky8i4wtx3ps&st=041m3oqt&dl=0)
+Download the example scenario from the following link: [here]([https://www.dropbox.com/scl/fi/k1duzi7fu13ppfno6fgyn/u_turn_maneuver.zip?rlkey=r6ppbl5m2rket1ky8i4wtx3ps&st=041m3oqt&dl=0](https://www.dropbox.com/scl/fo/a34yxthlrgepyjkgbqk6z/ALOW8mcg2w8OOp4xj2Egk4A?rlkey=grfx78f0osi5tg6f6wi0ye2br&st=jtvqr2i0&dl=0))
 
 Extract the contents and locate the path to the example scene directory.
 
@@ -105,7 +105,7 @@ Extract the contents and locate the path to the example scene directory.
 Once the example scene is extracted, execute the following command to train the model:
 
 ```
-python train_v2x_gaussian.py -s "path_to_example_scene"  --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py  # change data path.
+python train_v2x_gaussians.py -s "path_to_example_scene"  --port 6017 --expname "Experiment_Name" --configs arguments/multi_agents/v2x_gaussian.py  # change data path.
 ```
 
 
@@ -127,7 +127,7 @@ python metrics.py --model_path "output/Experiment_Name"
 ```
 
 ## Pre-trained Checkpoints
-Pre-trained checkpoints for various scenes are available [here](https://www.dropbox.com/scl/fi/due9icyvvun59e0vv3g72/u_turn_only_v2x_guided_training.zip?rlkey=h92cp4cctkc5cvkt0gcd1mq2a&st=kz6eeq2b&dl=0)
+Pre-trained checkpoints for various scenes are available [here]([https://www.dropbox.com/scl/fi/due9icyvvun59e0vv3g72/u_turn_only_v2x_guided_training.zip?rlkey=h92cp4cctkc5cvkt0gcd1mq2a&st=kz6eeq2b&dl=0](https://www.dropbox.com/scl/fo/dnbmm17sqw68y0igtmcto/APCWK9LvlXF2VfJOrxrUfO4?rlkey=shpdze8pzt6yah1wxkyvvzjjv&e=1&st=iha1bg6s&dl=0))
 
 Extract the contents and locate the path to the output scene directory.
 
@@ -148,7 +148,7 @@ For example: source_path='/home/uchihadj/PycharmProjects/try/data/u_turn_maneuve
 
 There are few helpful scripts:
 
-1. `scene/novel_view_utils.py` contains various novel view pose functions such as `add_noise_to_pose` that adds communication noise to pose, feel free to use it when rendering
+1. `scene/novel_view_utils.py` contains various novel view pose functions such as `add_noise_to_pose` that adds communication noise to poses during inference
 
 
 ## Pipeline Overview

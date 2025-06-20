@@ -96,7 +96,7 @@ Replace output/Experiment_Name/chkpnt_fine_5000.pth with the actual checkpoint p
 
 ### Quick Training on a Example Scene
 
-Download the example scenario from the following link: [here]([https://www.dropbox.com/scl/fi/k1duzi7fu13ppfno6fgyn/u_turn_maneuver.zip?rlkey=r6ppbl5m2rket1ky8i4wtx3ps&st=041m3oqt&dl=0](https://www.dropbox.com/scl/fo/a34yxthlrgepyjkgbqk6z/ALOW8mcg2w8OOp4xj2Egk4A?rlkey=grfx78f0osi5tg6f6wi0ye2br&st=jtvqr2i0&dl=0))
+Download the example scenario from the following link: [here](https://www.dropbox.com/scl/fo/a34yxthlrgepyjkgbqk6z/ALOW8mcg2w8OOp4xj2Egk4A?rlkey=grfx78f0osi5tg6f6wi0ye2br&st=jtvqr2i0&dl=0)
 
 Extract the contents and locate the path to the example scene directory.
 
@@ -127,7 +127,7 @@ python metrics.py --model_path "output/Experiment_Name"
 ```
 
 ## Pre-trained Checkpoints
-Pre-trained checkpoints for various scenes are available [here]([https://www.dropbox.com/scl/fi/due9icyvvun59e0vv3g72/u_turn_only_v2x_guided_training.zip?rlkey=h92cp4cctkc5cvkt0gcd1mq2a&st=kz6eeq2b&dl=0](https://www.dropbox.com/scl/fo/dnbmm17sqw68y0igtmcto/APCWK9LvlXF2VfJOrxrUfO4?rlkey=shpdze8pzt6yah1wxkyvvzjjv&e=1&st=iha1bg6s&dl=0))
+Pre-trained checkpoints for various scenes are available [here](https://www.dropbox.com/scl/fo/dnbmm17sqw68y0igtmcto/APCWK9LvlXF2VfJOrxrUfO4?rlkey=shpdze8pzt6yah1wxkyvvzjjv&e=1&st=iha1bg6s&dl=0)
 
 Extract the contents and locate the path to the output scene directory.
 

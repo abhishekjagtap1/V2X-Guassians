@@ -170,9 +170,10 @@ TODO:
 
 
 
-## Citation
+## Acknowledgement 
 
-If you find this code useful for your research, please use the following BibTeX entry.
+Some source code of ours is borrowed from [4DGS](https://github.com/hustvl/4DGaussians),[HexPlane](https://github.com/Caoang327/HexPlane), [TUMTRAf](https://github.com/tum-traffic-dataset/coopdet3d), [MVGS](https://github.com/xiaobiaodu/MVGS). We sincerely appreciate the excellent works of these authors.
+
 
 TODO:
 ```

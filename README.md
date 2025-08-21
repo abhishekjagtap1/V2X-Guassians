@@ -1,6 +1,6 @@
 
 # V2X-Gaussians: Gaussian Splatting for Multi-Agent Cooperative Dynamic Scene Reconstruction
-### [Project Page]() | [Paper]() | [Unofficial Implementation](https://github.com/abhishekjagtap1/Collaborative-dynmaic-gaussian-spaltting/tree/dev_depth_flow_supervision)
+### [Project Page](https://ieeexplore.ieee.org/document/11097436) | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11097436) | [Unofficial Implementation](https://github.com/abhishekjagtap1/Collaborative-dynmaic-gaussian-spaltting/tree/dev_depth_flow_supervision)
 
 Abstract— Recent advances in neural rendering, such as
 NeRF and Gaussian Splatting, have shown great potential
@@ -175,5 +175,18 @@ TODO:
 Some source code of ours is borrowed from [4DGS](https://github.com/hustvl/4DGaussians),[HexPlane](https://github.com/Caoang327/HexPlane), [TUMTRAf](https://github.com/tum-traffic-dataset/coopdet3d), [MVGS](https://github.com/xiaobiaodu/MVGS). We sincerely appreciate the excellent works of these authors.
 
 
-TODO:
+## BibTeX 
+If you find this repository useful, please consider giving a star ⭐ and citation 🦖:
+```
+@INPROCEEDINGS{11097436,
+  author={Jagtap, Abhishek Dinkar and Song, Rui and Sadashivaiah, Sanath Tiptur and Festag, Andreas},
+  booktitle={2025 IEEE Intelligent Vehicles Symposium (IV)}, 
+  title={V2X-Gaussians: Gaussian Splatting for Multi-Agent Cooperative Dynamic Scene Reconstruction}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1033-1039},
+  keywords={Training;Systematics;Intelligent vehicles;Ecosystems;Benchmark testing;Rendering (computer graphics);Neural radiance field;Iterative methods;Vehicle dynamics;Optimization},
+  doi={10.1109/IV64158.2025.11097436}}
+
 ```
